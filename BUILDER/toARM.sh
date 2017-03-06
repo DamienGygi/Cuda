@@ -1,0 +1,124 @@
+#!/bin/bash
+
+
+set -e
+set -u
+
+#------------------------------------------------------------------------------------
+#		input
+#------------------------------------------------------------------------------------
+
+#rien
+
+#------------------------------------------------------------------------------------
+#		tools
+#------------------------------------------------------------------------------------
+
+source ./makefile/private/script/install/toARM_ssh.sh
+
+# -----------------------
+#infographie
+# -----------------------
+
+function infographie_transfert()
+	{
+	local readonly USER="$1"
+	local readonly IP="$2"
+	local readonly VERSION="$3"
+	
+	local readonly FOLDER=infographie
+	local readonly TITLE=$FOLDER
+
+	local readonly SOURCE=/opt/api/cbi/$FOLDER
+	local readonly DESTINATION=/opt/api/cbi/${FOLDER}/$VERSION/lib
+	
+	toARM $TITLE $USER $IP $SOURCE $DESTINATION $VERSION
+	}
+
+# -----------------------
+# tools
+# -----------------------
+
+function tools_transfert()
+	{
+	local readonly USER="$1"
+	local readonly IP="$2"
+	local readonly VERSION="$3"
+
+	local readonly FOLDER=tools
+	local readonly TITLE=$FOLDER
+
+	local readonly SOURCE=/opt/api/cbi/$FOLDER
+	local readonly DESTINATION=/opt/api/cbi/${FOLDER}/$VERSION/lib
+	
+	toARM $TITLE $USER $IP $SOURCE $DESTINATION $VERSION
+	}
+
+# -----------------------
+# capteur
+# -----------------------
+
+function capteur_transfert()
+	{
+	local readonly USER="$1"
+	local readonly IP="$2"
+	local readonly VERSION="$3"
+
+	local readonly FOLDER=capteur
+	local readonly TITLE=$FOLDER
+
+	local readonly SOURCE=/opt/api/cbi/$FOLDER
+	local readonly DESTINATION=/opt/api/cbi/${FOLDER}/$VERSION/lib
+	
+	toARM $TITLE $USER $IP $SOURCE $DESTINATION $VERSION
+	}
+
+# -----------------------
+# main
+# -----------------------
+
+function main()
+	{
+	local readonly  TIME_START_S=$(date +%s)
+
+	local readonly IP_JETSON1=157.26.100.60
+	local readonly IP_JETSON2=157.26.103.143
+	local readonly IP_JETSON3=157.26.103.7
+	local readonly IP_JETSON4=157.26.103.6
+	local readonly IP_JETSON6=157.26.103.142
+	local readonly IP_JETSON7=157.26.103.90
+
+	local readonly USER_JETSON=ubuntu
+	local readonly IP_JETSON=$IP_JETSON3
+
+
+	local readonly VERSION_INFOGRAPHIE=301
+	local readonly VERSION_TOOLS=301_004
+	local readonly VERSION_CAPTEUR=004
+
+	infographie_transfert $USER_JETSON $IP_JETSON $VERSION_INFOGRAPHIE
+	tools_transfert $USER_JETSON $IP_JETSON $VERSION_TOOLS
+	capteur_transfert $USER_JETSON $IP_JETSON $VERSION_CAPTEUR
+	}
+
+#------------------------------------------------------------------------------------
+#		main
+#------------------------------------------------------------------------------------
+
+#-------------
+# Warning
+#-------------
+#
+#	(W1)	Update version in xxx_transfert above function
+#
+#	(W2) 	Update IP and USER in main function
+#
+#	(W3)	Don't run this script in sudo
+
+time main
+echo ""
+
+#------------------------------------------------------------------------------------
+#		end
+#------------------------------------------------------------------------------------
+

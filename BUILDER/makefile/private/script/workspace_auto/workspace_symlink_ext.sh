@@ -1,0 +1,1 @@
+/opt/cbi/make/002/private/script/workspace_auto/workspace_symlink_ext.sh
