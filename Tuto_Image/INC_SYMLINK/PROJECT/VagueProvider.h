@@ -1,1 +1,1 @@
-/home/arc6/CUDA/toStudent/code/WCuda/Tuto_Image//src/core/01_simple_RGBA_uchar4/01_Vague/02_Provider/VagueProvider.h
+/home/arc28/CUDA/toStudent/code/WCuda/Tuto_Image/src/core/01_simple_RGBA_uchar4/01_Vague/02_Provider/VagueProvider.h

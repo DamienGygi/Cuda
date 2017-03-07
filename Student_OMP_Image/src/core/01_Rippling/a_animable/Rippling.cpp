@@ -94,21 +94,22 @@ void Rippling::processEntrelacementOMP(uchar4* ptrTabPixels, uint w, uint h, con
     {
     RipplingMath ripplingMath = RipplingMath(w);
 //    RipplingMath ripplingMath(w);
-    const int WH=w*h;
+    const int WH = w * h;
 
-    #pragma omp parallel
-    {
-    const int NB_THREADS=OmpTools::getNbThread();
-    const int TID = OmpTools::getTid();
-    int s = TID;
-    int i;
-    int j;
-    while (s<WH){
-	IndiceTools::toIJ(s, w, &i, &j);
-	ripplingMath.colorIJ(&ptrTabPixels[s],i,j,t);
-	s+=NB_THREADS;
-    }
-    }
+#pragma omp parallel
+	{
+	const int NB_THREADS = OmpTools::getNbThread();
+	const int TID = OmpTools::getTid();
+	int s = TID;
+	int i;
+	int j;
+	while (s < WH)
+	    {
+	    IndiceTools::toIJ(s, w, &i, &j);
+	    ripplingMath.colorIJ(&ptrTabPixels[s], i, j, t);
+	    s += NB_THREADS;
+	    }
+	}
     }
 
 /*----------------------------------------------------------------------*\

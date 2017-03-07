@@ -1,4 +1,4 @@
-10:39:39 **** Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
+14:01:08 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -84,13 +84,13 @@ Cuda compilation tools, release 8.0, V8.0.44
 ==================================================================================
 [CBI] -> Target Name  : Student_Cuda_Image_cuda_80_x86_64
 [CBI] ->
-[CBI] -> Build        : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
+[CBI] -> Build        : /tmp/ramdrive/arc28/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
 [CBI] -> Deploy       : ../RELEASE/bin
 [CBI] ->
 [CBI] -> Type	      : EXE
 [CBI] -> Arch	      : x86_64
 [CBI] -> OS	 		  : Linux
-[CBI] -> User	 	  : arc6
+[CBI] -> User	 	  : arc28
 [CBI] ->
 [CBI] -> Task		  : Compiling-Linking !
 ==================================================================================
@@ -365,29 +365,18 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/obj
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainAnimable.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBarivox.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBruteForce.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/01_Rippling/02_provider/RipplingProvider.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/host/Rippling.cu
-src/cpp/core/01_Rippling/01_animable/device/math/RipplingMath.h(79): warning: missing return statement at end of non-void function "RipplingMath::dij"
+make[1]: Nothing to be done for `compilelink'.
 
-src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu(47): warning: variable "WH" was declared but never referenced
+[CBI] -> Deploying      : ../RELEASE/bin/Student_Cuda_Image_cuda_80_x86_64.run
 
-src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu(47): warning: variable "WH" was declared but never referenced
+[CBI] -> Symlink Project Inc
+[CBI] -> To update code completion : ctrl-shift-s   or   gui/index/rebuild
 
-make[1]: *** [/tmp/ramdrive/arc6/Targets/Student_Cuda_Image/obj/ripplingDevice.o] Terminated
-make: *** [jall] Terminated
-Command canceled
+[CBI] -> Student_Cuda_Image_cuda_80_x86_64 : End ALL!
 
-10:39:41 Build Cancelled (took 2s.533ms)
+
+14:01:08 Build Finished (took 478ms)
 
