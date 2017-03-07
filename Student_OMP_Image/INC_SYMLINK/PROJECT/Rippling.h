@@ -1,1 +1,1 @@
-/home/arc28/CUDA/toStudent/code/WCuda/Student_OMP_Image/src/core/01_Rippling/a_animable/Rippling.h
+/home/arc28/CUDA/toStudent/code/WCuda/Student_OMP_Image//src/core/01_Rippling/a_animable/Rippling.h

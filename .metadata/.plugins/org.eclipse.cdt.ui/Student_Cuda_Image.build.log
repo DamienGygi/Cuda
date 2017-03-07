@@ -1,4 +1,4 @@
-14:01:08 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
+14:55:59 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -125,6 +125,9 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : src/cpp/core/01_Rippling/01_animable/device/math/
 [CBI] ->              : src/cpp/core/01_Rippling/01_animable/host/
 [CBI] ->              : src/cpp/core/01_Rippling/02_provider/
+[CBI] ->              : src/cpp/core/02_Mandelbrot/a_animable/device/math/
+[CBI] ->              : src/cpp/core/02_Mandelbrot/a_animable/host/
+[CBI] ->              : src/cpp/core/02_Mandelbrot/b_provider/
 
 
 [CBI] -> LIB_PATH (auto detect):
@@ -365,18 +368,141 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Student_Cuda_Image/bin
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Student_Cuda_Image/obj
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Student_Cuda_Image/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
-make[1]: Nothing to be done for `compilelink'.
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainAnimable.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBarivox.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBruteForce.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/01_Rippling/02_provider/RipplingProvider.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu
+[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu
+[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu
+[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/host/Rippling.cu
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu:1:24: warning: extra tokens at end of #include directive [enabled by default]
+ #include "Mandelbrot.h".h"
+                        ^
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu:1:26: warning: missing terminating " character [enabled by default]
+ #include "Mandelbrot.h".h"
+                          ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu:1:24: warning: extra tokens at end of #include directive [enabled by default]
+ #include "Mandelbrot.h".h"
+                        ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu:1:26: warning: missing terminating " character [enabled by default]
+ #include "Mandelbrot.h".h"
+                          ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(105): error: Calibreur is not a template
 
-[CBI] -> Deploying      : ../RELEASE/bin/Student_Cuda_Image_cuda_80_x86_64.run
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: identifier "Interval" is undefined
 
-[CBI] -> Symlink Project Inc
-[CBI] -> To update code completion : ctrl-shift-s   or   gui/index/rebuild
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: type name is not allowed
 
-[CBI] -> Student_Cuda_Image_cuda_80_x86_64 : End ALL!
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): warning: expression has no effect
 
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: expected a ")"
 
-14:01:08 Build Finished (took 478ms)
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(105): error: Calibreur is not a template
+
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: identifier "Interval" is undefined
+
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: type name is not allowed
+
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): warning: expression has no effect
+
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h(27): error: expected a ")"
+
+In file included from src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:3:0,
+                 from src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:2:
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:105:2: error: ‘Calibreur’ does not name a type
+  Calibreur<float> calibreur;
+  ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h: In constructor ‘MandelbrotMath::MandelbrotMath(uint)’:
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:27:3: error: class ‘MandelbrotMath’ does not have any field named ‘calibreur’
+   calibreur(Interval<float>(0, n), Interval<float>(0, 1))
+   ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:27:13: error: ‘Interval’ was not declared in this scope
+   calibreur(Interval<float>(0, n), Interval<float>(0, 1))
+             ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:27:22: error: expected primary-expression before ‘float’
+   calibreur(Interval<float>(0, n), Interval<float>(0, 1))
+                      ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:27:45: error: expected primary-expression before ‘float’
+   calibreur(Interval<float>(0, n), Interval<float>(0, 1))
+                                             ^
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h: In member function ‘void MandelbrotMath::colorXY(uchar4*, float, float, float)’:
+src/cpp/core/02_Mandelbrot/a_animable/device/math/MandelbrotMath.h:58:7: error: ‘calibreur’ was not declared in this scope
+       calibreur.calibrer(hue);
+       ^
+In file included from src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:2:0:
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h: At global scope:
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:6:17: error: ‘cpu’ is not a namespace-name
+ using namespace cpu;
+                 ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:6:20: error: expected namespace-name before ‘;’ token
+ using namespace cpu;
+                    ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:54:2: error: ‘Variateur’ does not name a type
+  Variateur<float> variateurAnimation;
+  ^
+src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:8:17: error: ‘cpu’ is not a namespace-name
+ using namespace cpu;
+                 ^
+src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:8:20: error: expected namespace-name before ‘;’ token
+ using namespace cpu;
+                    ^
+src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp: In member function ‘virtual gpu::Animable_I<uchar4>* MandelbrotProvider::createAnimable()’:
+src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:62:58: error: no matching function for call to ‘Mandelbrot::Mandelbrot(Grid&, int&, int&, float&, int&, gpu::DomaineMath&)’
+     return new Mandelbrot(grid,dw, dh, dt, n, domaineMath);
+                                                          ^
+src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:62:58: note: candidates are:
+In file included from src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp:2:0:
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:25:2: note: Mandelbrot::Mandelbrot(uint, uint, float, uint, const gpu::DomaineMath&)
+  Mandelbrot(uint w, uint h, float dt, uint n, const DomaineMath& domaineMath);
+  ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:25:2: note:   candidate expects 5 arguments, 6 provided
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:16:7: note: Mandelbrot::Mandelbrot(const Mandelbrot&)
+ class Mandelbrot: public Animable_I<uchar4>
+       ^
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h:16:7: note:   candidate expects 1 argument, 6 provided
+make[1]: *** [/tmp/ramdrive/arc28/Targets/Student_Cuda_Image/obj/MandelbrotProvider.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h(6): error: name must be a namespace name
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h(54): error: Variateur is not a template
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu(9): error: name followed by "::" must be a class or namespace name
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu(35): error: no instance of overloaded function "Mandelbrot::Mandelbrot" matches the specified type
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu(35): error: expected a "{"
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu(73): error: too few arguments in function call
+
+src/cpp/core/01_Rippling/01_animable/device/math/RipplingMath.h(82): warning: missing return statement at end of non-void function "RipplingMath::dij"
+
+10 errors detected in the compilation of "/tmp/tmpxft_00004de8_00000000-7_Mandelbrot.cpp1.ii".
+make[1]: *** [/tmp/ramdrive/arc28/Targets/Student_Cuda_Image/obj/Mandelbrot.o] Error 2
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h(6): error: name must be a namespace name
+
+src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.h(54): error: Variateur is not a template
+
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu(46): error: identifier "n" is undefined
+
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu(50): error: name followed by "::" must be a class or namespace name
+
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu(51): error: name followed by "::" must be a class or namespace name
+
+src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu(61): error: identifier "workPixel" is undefined
+
+10 errors detected in the compilation of "/tmp/tmpxft_00004ddd_00000000-7_MandelbrotDevice.cpp1.ii".
+make[1]: *** [/tmp/ramdrive/arc28/Targets/Student_Cuda_Image/obj/MandelbrotDevice.o] Error 2
+make: *** [jall] Error 2
+
+14:56:01 Build Finished (took 2s.628ms)
 

@@ -1,4 +1,4 @@
-15:15:02 **** Incremental Build of configuration CudaGCC_parallel for project Tuto_Image_Cuda ****
+14:22:42 **** Build of configuration CudaGCC_parallel for project Tuto_Image_Cuda ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -84,13 +84,13 @@ Cuda compilation tools, release 8.0, V8.0.44
 ==================================================================================
 [CBI] -> Target Name  : Tuto_Image_Cuda_cuda_80_x86_64
 [CBI] ->
-[CBI] -> Build        : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
+[CBI] -> Build        : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
 [CBI] -> Deploy       : ../RELEASE/bin
 [CBI] ->
 [CBI] -> Type	      : EXE
 [CBI] -> Arch	      : x86_64
 [CBI] -> OS	 		  : Linux
-[CBI] -> User	 	  : bilat
+[CBI] -> User	 	  : arc28
 [CBI] ->
 [CBI] -> Task		  : Compiling-Linking !
 ==================================================================================
@@ -270,9 +270,9 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : nvrtc
 [CBI] ->              : nvrtc-builtins
 
-[CBI] -> Create folder : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/bin
-[CBI] -> Create folder : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/obj
-[CBI] -> Create folder : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/cubin
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/bin
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/obj
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
@@ -312,7 +312,7 @@ Cuda compilation tools, release 8.0, V8.0.44
 [Tuto_Image_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/core/02_simple_type/03_Damier_HSBA_float4/01_animable/device/damierHSBAFloatDevice.cu
 [Tuto_Image_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/core/02_simple_type/03_Damier_HSBA_float4/01_animable/host/DamierHSBAFloat.cu
 
-[CBI] -> Linking to   : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
+[CBI] -> Linking to   : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
 
 [CBI] -> Library Link :
 [CBI] ->
@@ -366,13 +366,13 @@ Cuda compilation tools, release 8.0, V8.0.44
 
 ==================================================================================
 [CBI] -> Target Name  : Tuto_Image_Cuda_cuda_80_x86_64
-[CBI] -> Location     : /tmp/ramdrive/bilat/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
+[CBI] -> Location     : /tmp/ramdrive/arc28/Targets/Tuto_Image_Cuda/bin/Tuto_Image_Cuda_cuda_80_x86_64.run
 [CBI] -> Deploy 	  : ../RELEASE/bin
 [CBI] ->
 [CBI] -> Type	 	  : EXE
 [CBI] -> Arch	 	  : x86_64
 [CBI] -> OS	 	      : Linux
-[CBI] -> User	 	  : bilat
+[CBI] -> User	 	  : arc28
 [CBI] ->
 [CBI] -> Compilateur  : g++ && nvcc
 [CBI] -> Task		  : End Compiling-Linking !
@@ -388,5 +388,5 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] -> Tuto_Image_Cuda_cuda_80_x86_64 : End ALL!
 
 
-15:15:06 Build Finished (took 4s.631ms)
+14:22:48 Build Finished (took 5s.645ms)
 

@@ -49,7 +49,7 @@ Animable_I<uchar4>* RipplingProvider::createAnimable()
     dim3 dg = dim3(96,1,1);
     dim3 db = dim3(512,1,1);
 
-    Grid grid(dg,db);  // TODO definissez une grille cuda (dg, db)
+    Grid grid(dg,db);
 
     return new Rippling(grid,dw, dh, dt);
     }

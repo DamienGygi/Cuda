@@ -1,4 +1,4 @@
-08:59:18 **** Incremental Build of configuration GCC_parallel for project Student_OMP_Image ****
+14:22:33 **** Build of configuration GCC_parallel for project Student_OMP_Image ****
 cbicc gcc jall 
 
 --------------------------------------------------------
@@ -227,6 +227,8 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Student_OMP_Image/bin
+[CBI] -> Create folder : /tmp/ramdrive/arc28/Targets/Student_OMP_Image/obj
 
 [CBI] -> Compilation parallel (32 threads)
 
@@ -304,5 +306,5 @@ src/core/02_Mandelbrot/a_animable/Mandelbrot.cpp:1:26: warning: missing terminat
 [CBI] -> Student_OMP_Image_gcc_x86_64 : End ALL!
 
 
-08:59:19 Build Finished (took 1s.278ms)
+14:22:34 Build Finished (took 1s.176ms)
 
