@@ -3,8 +3,10 @@
 #include "Device.h"
 
 #include "IndiceTools_GPU.h"
+#include "DomaineMath_GPU.h"
 
 #include "RipplingMath.h"
+
 using namespace gpu;
 
 // Attention : 	Choix du nom est impotant!

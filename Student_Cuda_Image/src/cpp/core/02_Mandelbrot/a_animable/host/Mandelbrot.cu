@@ -1,12 +1,13 @@
-#include "Mandelbrot.h".h"
+#include <iostream>
+#include <assert.h>
+
+#include "Device.h"
+
+#include "Mandelbrot.h"
 #include "MandelbrotMath.h"
 
-#include <iostream>
-#include <omp.h>
-#include "OmpTools.h"
-
 #include "IndiceTools_GPU.h"
-using cpu::IndiceTools;
+#include "DomaineMath_GPU.h"
 
 using std::cout;
 using std::endl;
@@ -32,7 +33,7 @@ extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float dt
  |*		Public			*|
  \*-------------------------------------*/
 
-Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float dt, uint n, const DomaineMath& domaineMath) :
+Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float dt, uint n, const DomaineMath &domaineMath) :
 	Animable_I<uchar4>(grid, w, h, "Mandelbrot_Cuda", domaineMath)
     {
     // Input
@@ -70,7 +71,7 @@ void Mandelbrot::animationStep()
 void Mandelbrot::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
     Device::lastCudaError("rippling rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
-    mandelbrot<<<dg,db>>>(ptrDevPixels,w,h,t);
+    mandelbrot<<<dg,db>>>(ptrDevPixels,w,h,t,n,domaineMath);
     // le kernel est importer ci-dessus (ligne 19)
 
     Device::lastCudaError("rippling rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release

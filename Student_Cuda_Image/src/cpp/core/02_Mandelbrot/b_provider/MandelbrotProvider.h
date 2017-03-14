@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cudaTools.h"
 #include "Animable_I_GPU.h"
 #include "Provider_I_GPU.h"
 
@@ -26,9 +27,9 @@ class MandelbrotProvider: public Provider_I<uchar4>
 	 |*		Override		*|
 	 \*-------------------------------------*/
 
-	Animable_I<uchar4>* createAnimable(void);
+	virtual Animable_I<uchar4>* createAnimable(void);
 
-	Image_I* createImageGL(void);
+	virtual Image_I* createImageGL(void);
 
     };
 
