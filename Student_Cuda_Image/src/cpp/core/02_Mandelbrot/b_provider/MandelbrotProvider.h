@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cudaTools.h"
-#include "Animable_I_GPU.h"
+
 #include "Provider_I_GPU.h"
 
 using namespace gpu;

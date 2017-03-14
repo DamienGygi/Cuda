@@ -5,9 +5,7 @@
 
 #include "Mandelbrot.h"
 #include "MandelbrotMath.h"
-
-#include "IndiceTools_GPU.h"
-#include "DomaineMath_GPU.h"
+#include <assert.h>
 
 using std::cout;
 using std::endl;
@@ -15,7 +13,7 @@ using std::endl;
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
  \*---------------------------------------------------------------------*/
-extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float dt, uint n, const DomaineMath domaineMath);
+extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float t, uint n, DomaineMath domaineMath);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -33,14 +31,14 @@ extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float dt
  |*		Public			*|
  \*-------------------------------------*/
 
-Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float dt, uint n, const DomaineMath &domaineMath) :
-	Animable_I<uchar4>(grid, w, h, "Mandelbrot_Cuda", domaineMath)
+Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float t, uint n, const DomaineMath &domaineMath) :
+	Animable_I<uchar4>(grid, w, h, "Mandelbrot_Cuda", domaineMath), variateurAnimation(Interval<float>(30,100), t)
     {
     // Input
     this->n = n;
 
     // Tools
-    this->t = 0;					// protected dans super classe Animable
+    this->t = t;					// protected dans super classe Animable
 
     }
 
@@ -58,7 +56,8 @@ Mandelbrot::~Mandelbrot(void)
  */
 void Mandelbrot::animationStep()
     {
-    this->t += t;
+    this->t+=t;
+    //this->n =variateurAnimation.varierAndGet();
     }
 
 /*--------------------------------------*\
@@ -73,7 +72,6 @@ void Mandelbrot::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
     Device::lastCudaError("rippling rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
     mandelbrot<<<dg,db>>>(ptrDevPixels,w,h,t,n,domaineMath);
     // le kernel est importer ci-dessus (ligne 19)
-
     Device::lastCudaError("rippling rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
     }
 

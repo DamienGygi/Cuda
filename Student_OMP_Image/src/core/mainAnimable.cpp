@@ -31,7 +31,7 @@ int mainAnimable(Settings& settings);
  \*-------------------------------------*/
 
 static void rippling();
-static void mandelBrot();
+static void mandelbrot();
 
 // Tools
 template<typename T>
@@ -49,8 +49,8 @@ int mainAnimable(Settings& settings)
     {
     cout << "\n[Animable] mode" << endl;
 
-    rippling();
-    // mandelbrot();
+    //rippling();
+    mandelbrot();
 
     cout << "\n[Animable] end" << endl;
 

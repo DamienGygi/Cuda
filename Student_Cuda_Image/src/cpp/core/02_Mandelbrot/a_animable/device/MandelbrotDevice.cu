@@ -2,12 +2,12 @@
 #include "cudaTools.h"
 #include "Device.h"
 
-#include "Mandelbrot.h"
 #include "MandelbrotMath.h"
 
 #include "IndiceTools_GPU.h"
 #include "DomaineMath_GPU.h"
 
+using namespace gpu;
 using std::cout;
 using std::endl;
 
@@ -18,7 +18,7 @@ using std::endl;
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
-__global__ void Mandelbrot(uchar4* ptrDevPixels, uint w, uint h,float t,uint n, const DomaineMath domaineMath);
+__global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h,float t,uint n, DomaineMath domaineMath);
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
@@ -42,7 +42,7 @@ __global__ void Mandelbrot(uchar4* ptrDevPixels, uint w, uint h,float t,uint n, 
 /**
  * Override (code entrainement cuda)
  */
-__global__ void Mandelbrot(uchar4* ptrDevPixels, uint w, uint h,float t,uint n, const DomaineMath domaineMath)
+__global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h,float t,uint n, DomaineMath domaineMath)
     {
     MandelbrotMath mandelbrotMath(n); // ici pour preparer cuda
 

@@ -32,7 +32,7 @@ using std::endl;
  \*-------------------------------------*/
 
 Mandelbrot::Mandelbrot(uint w, uint h, float dt, uint n, const DomaineMath& domaineMath) :
-	Animable_I<uchar4>(w, h, "Damier_OMP_rgba_uchar4",domaineMath), variateurAnimation(Interval<float>(0, 2 * PI), dt)
+	Animable_I<uchar4>(w, h, "Damier_OMP_rgba_uchar4",domaineMath), variateurAnimation(Interval<float>(0, 300), dt)
     {
     // Input
     this->n = n;
@@ -42,7 +42,7 @@ Mandelbrot::Mandelbrot(uint w, uint h, float dt, uint n, const DomaineMath& doma
     this->parallelPatern = ParallelPatern::OMP_MIXTE;   // protected dans super classe Animable
 
     // OMP
-    cout << "\n[Damier] : OMP : nbThread = " << this->nbThread << endl; // protected dans super classe Animable
+    cout << "\n[Mandelbrot] : OMP : nbThread = " << this->nbThread << endl; // protected dans super classe Animable
     }
 
 Mandelbrot::~Mandelbrot(void)
@@ -59,7 +59,8 @@ Mandelbrot::~Mandelbrot(void)
  */
 void Mandelbrot::animationStep()
     {
-    this->t = variateurAnimation.varierAndGet(); // in [0,2pi]
+    this->n = variateurAnimation.varierAndGet(); // in [0,2pi]
+    this->t=this->n;
     }
 
 /*--------------------------------------*\

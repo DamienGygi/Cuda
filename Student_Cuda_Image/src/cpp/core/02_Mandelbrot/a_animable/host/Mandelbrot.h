@@ -1,9 +1,9 @@
 #pragma once
 
-#include "MandelbrotMath.h"
 #include "cudaTools.h"
 #include "MathTools.h"
 #include "Animable_I_GPU.h"
+#include "Variateur_GPU.h"
 using namespace gpu;
 
 /*----------------------------------------------------------------------*\
@@ -23,7 +23,7 @@ class Mandelbrot: public Animable_I<uchar4>
 
     public:
 
-	Mandelbrot(const Grid& grid,uint w, uint h, float dt, uint n, const DomaineMath& domaineMath);
+	Mandelbrot(const Grid& grid,uint w, uint h, float t, uint n, const DomaineMath& domaineMath);
 
 	virtual ~Mandelbrot(void);
 
@@ -51,8 +51,7 @@ class Mandelbrot: public Animable_I<uchar4>
 	// Inputs
 	uint n;
 	float t;
-	// Tools
-
+	Variateur<float> variateurAnimation;
     };
 
 /*----------------------------------------------------------------------*\

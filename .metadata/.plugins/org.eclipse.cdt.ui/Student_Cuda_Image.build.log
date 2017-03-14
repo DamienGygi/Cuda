@@ -1,4 +1,4 @@
-08:27:08 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
+09:59:10 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -368,25 +368,10 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/obj
-[CBI] -> Create folder : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainAnimable.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBarivox.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBruteForce.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/02_Mandelbrot/b_provider/MandelbrotProvider.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/01_Rippling/02_provider/RipplingProvider.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Mandelbrot/a_animable/device/MandelbrotDevice.cu
 [Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Mandelbrot/a_animable/host/Mandelbrot.cu
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Rippling/01_animable/host/Rippling.cu
-src/cpp/core/01_Rippling/01_animable/device/math/RipplingMath.h(82): warning: missing return statement at end of non-void function "RipplingMath::dij"
-
 
 [CBI] -> Linking to   : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
 
@@ -513,11 +498,30 @@ src/cpp/core/01_Rippling/01_animable/device/math/RipplingMath.h(82): warning: mi
 [CBI] ->              : -lopencv_videoio_gcc484
 [CBI] ->              : -lopencv_videostab_gcc484
 
-/tmp/ramdrive/arc6/Targets/Student_Cuda_Image/obj/Mandelbrot.o: In function `Mandelbrot::process(uchar4*, unsigned int, unsigned int, gpu::DomaineMath const&)':
-tmpxft_0000572d_00000000-4_Mandelbrot.cudafe1.cpp:(.text+0xb4): undefined reference to `mandelbrot(uchar4*, unsigned int, unsigned int, float, unsigned int, gpu::DomaineMath)'
-collect2: error: ld returned 1 exit status
-make[1]: *** [/tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run] Error 1
-make: *** [jall] Error 2
 
-08:27:11 Build Finished (took 3s.31ms)
+==================================================================================
+[CBI] -> Target Name  : Student_Cuda_Image_cuda_80_x86_64
+[CBI] -> Location     : /tmp/ramdrive/arc6/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
+[CBI] -> Deploy 	  : ../RELEASE/bin
+[CBI] ->
+[CBI] -> Type	 	  : EXE
+[CBI] -> Arch	 	  : x86_64
+[CBI] -> OS	 	      : Linux
+[CBI] -> User	 	  : arc6
+[CBI] ->
+[CBI] -> Compilateur  : g++ && nvcc
+[CBI] -> Task		  : End Compiling-Linking !
+[CBI] -> Time		  : 4 (s)
+==================================================================================
+
+
+[CBI] -> Deploying      : ../RELEASE/bin/Student_Cuda_Image_cuda_80_x86_64.run
+
+[CBI] -> Symlink Project Inc
+[CBI] -> To update code completion : ctrl-shift-s   or   gui/index/rebuild
+
+[CBI] -> Student_Cuda_Image_cuda_80_x86_64 : End ALL!
+
+
+09:59:14 Build Finished (took 3s.730ms)
 

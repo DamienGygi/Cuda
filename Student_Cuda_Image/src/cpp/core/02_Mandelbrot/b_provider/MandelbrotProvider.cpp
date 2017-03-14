@@ -4,9 +4,6 @@
 #include "MathTools.h"
 #include "Grid.h"
 
-#include "ImageAnimable_GPU.h"
-#include "DomaineMath_GPU.h"
-using namespace gpu;
 
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|

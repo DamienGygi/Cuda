@@ -24,7 +24,7 @@ class MandelbrotMath
 
     public:
 	MandelbrotMath(uint n) :
-		calibreur(Interval<float>(0, n), Interval<float>(0, 1))
+		calibreur(Interval<float>(0.0, n), Interval<float>(0.0, 1.0))
 	    {
 	    this->n = n;
 	    }
@@ -48,7 +48,7 @@ class MandelbrotMath
 	void colorXY(uchar4* ptrColor, float x, float y, float t)
 	    {
 		float k = getK(x, y);
-		if(k > this->n){
+		if(k >= this->n){
 		    ptrColor->x = 0;
 		    ptrColor->y = 0;
 		    ptrColor->z = 0;

@@ -49,7 +49,7 @@ int mainAnimable(Settings& settings)
     // Attention : pas tous a la fois
 
     rippling();
-    // mandelbrot();
+    //mandelbrot();
 
     cout << "\n[Animable] end" << endl;
 
