@@ -14,7 +14,7 @@ using namespace gpu;
  |*		Public			*|
  \*-------------------------------------*/
 
-class RipplingMath
+class RayTracingMath
     {
 
 	/*--------------------------------------*\
@@ -23,7 +23,7 @@ class RipplingMath
 
     public:
 
-	__device__ RipplingMath(int w, int h)
+	__device__ RayTracingMath(int w, int h)
 	    {
 	    this->dim2 = w / 2;
 	    }
@@ -31,7 +31,7 @@ class RipplingMath
 	// constructeur copie automatique car pas pointeur dans VagueMath
 
 	__device__
-	   virtual ~RipplingMath()
+	   virtual ~RayTracingMath()
 	    {
 	    // rien
 	    }
@@ -61,6 +61,9 @@ class RipplingMath
 	__device__
 	void f(uchar* ptrLevelGris, int i, int j, float t)
 	    {
+	    // TODO cf fonction math pdf
+	    // use focntion dij ci-dessous
+
 		float result;
 		dij(i, j, &result);
 		result=result/10;

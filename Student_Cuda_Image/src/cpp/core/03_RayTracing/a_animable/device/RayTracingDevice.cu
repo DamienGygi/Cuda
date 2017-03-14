@@ -1,21 +1,18 @@
-#include <iostream>
-#include <stdlib.h>
-#include <string.h>
-
-#include "Device.h"
+#include "Indice2D.h"
 #include "cudaTools.h"
+#include "Device.h"
 
-#include "RipplingProvider.h"
-#include "MandelbrotProvider.h"
-#include "RayTracingProvider.h"
+#include "IndiceTools_GPU.h"
+#include "DomaineMath_GPU.h"
 
-#include "Settings_GPU.h"
-#include "Viewer_GPU.h"
+#include "RayTracingMath.h"
+
 using namespace gpu;
 
-using std::cout;
-using std::endl;
-using std::string;
+// Attention : 	Choix du nom est impotant!
+//		VagueDevice.cu et non Vague.cu
+// 		Dans ce dernier cas, probl�me de linkage, car le nom du .cu est le meme que le nom d'un .cpp (host)
+//		On a donc ajouter Device (ou n'importequoi) pour que les noms soient diff�rents!
 
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
@@ -29,7 +26,7 @@ using std::string;
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainImage(Settings& settings);
+__global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t);
 
 /*--------------------------------------*\
  |*		Private			*|
@@ -43,26 +40,24 @@ int mainImage(Settings& settings);
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainImage(Settings& settings)
+__global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t)
     {
-    cout << "\n[Image] mode" << endl;
+    RayTracingMath rayTracing = RayTracingMath(w, h);
 
-    GLUTImageViewers::init(settings.getArgc(), settings.getArgv()); //only once
+    const int TID = Indice2D::tid();
+    const int NB_THREAD = Indice2D::nbThread();
+    const int WH = w * h;
 
-    // ImageOption : (boolean,boolean) : (isSelection,isAnimation)
-    ImageOption zoomable(true);
-    ImageOption nozoomable(false);
+    int s = TID;
+    int i;
+    int j;
+    while (s < WH)
+	{
+	IndiceTools::toIJ(s, w, &i, &j);
+	rayTracing.colorIJ(&ptrDevPixels[s], i, j, t);
+	s += NB_THREAD;
+	}
 
-    //Viewer<MandelbrotProvider> mandelbrot(zoomable, 0, 0);
-    //Viewer<RipplingProvider> rippling(nozoomable, 25, 25); // imageOption px py
-    Viewer<RayTracingProvider> rayTracing(nozoomable, 25, 25); // imageOption px py
-
-    // Common
-    GLUTImageViewers::runALL(); // Bloquant, Tant qu'une fenetre est ouverte
-
-    cout << "\n[Image] end" << endl;
-
-    return EXIT_SUCCESS;
     }
 
 /*--------------------------------------*\
