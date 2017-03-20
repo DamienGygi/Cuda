@@ -1,5 +1,5 @@
 #pragma once
-#include "SphereCreator.h"
+#include "Sphere.h"
 class SphereCreator
     {
 	/*--------------------------------------*\

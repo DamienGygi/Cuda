@@ -22,10 +22,10 @@ class RayTracingMath
 	 \*-------------------------------------*/
 
     public:
-
-	__device__ RayTracingMath(int w, int h)
+	__device__ RayTracingMath(Sphere* ptrDevTabSphere, int nbSphere)
 	    {
-	    this->dim2 = w / 2;
+	    this->nbSphere=nbSphere;
+	    this->ptrDevTabSphere=ptrDevTabSphere;
 	    }
 
 	// constructeur copie automatique car pas pointeur dans VagueMath
@@ -56,39 +56,14 @@ class RayTracingMath
 	    ptrColor->w = 255; // opaque
 	    }
 
-    private:
-
-	__device__
-	void f(uchar* ptrLevelGris, int i, int j, float t)
-	    {
-	    // TODO cf fonction math pdf
-	    // use focntion dij ci-dessous
-
-		float result;
-		dij(i, j, &result);
-		result=result/10;
-		float num = cosf(result-t/7);
-		float den =result+1;
-
-		*ptrLevelGris=128+(127*(num/den));
-	    }
-
-	__device__
-	void  dij(int i, int j,float* ptrResult)
-	    {
-	    float fi = i - dim2;
-	    float fj = j-dim2;
-	    *ptrResult=sqrtf((fi*fi)+(fj*fj));
-	    }
-
 	/*--------------------------------------*\
 	|*		Attributs		*|
 	 \*-------------------------------------*/
 
     private:
-
 	// Tools
-	float dim2;
+	int nbSphere;
+	Sphere *ptrDevTabSphere;
 
     };
 
