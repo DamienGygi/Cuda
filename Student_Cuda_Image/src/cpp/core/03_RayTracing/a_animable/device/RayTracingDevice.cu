@@ -5,7 +5,9 @@
 #include "IndiceTools_GPU.h"
 #include "DomaineMath_GPU.h"
 
+#include "Sphere.h"
 #include "RayTracingMath.h"
+
 
 using namespace gpu;
 
@@ -26,8 +28,7 @@ using namespace gpu;
  |*		Public			*|
  \*-------------------------------------*/
 
-__global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t);
-
+__global__ void raytracing(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrSphere, int nbSphere);
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
@@ -40,9 +41,9 @@ __global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t);
  |*		Public			*|
  \*-------------------------------------*/
 
-__global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t)
+__global__ void raytracing(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevTabSphere, int nbSphere)
     {
-    RayTracingMath rayTracing = RayTracingMath(w, h);
+    RayTracingMath rayTracing = RayTracingMath(ptrDevTabSphere, nbSphere);
 
     const int TID = Indice2D::tid();
     const int NB_THREAD = Indice2D::nbThread();
@@ -54,7 +55,7 @@ __global__ void rayTracing(uchar4* ptrDevPixels, uint w, uint h, float t)
     while (s < WH)
 	{
 	IndiceTools::toIJ(s, w, &i, &j);
-	rayTracing.colorIJ(&ptrDevPixels[s], i, j, t);
+	rayTracing.colorIJ(&ptrDevPixels[s], (float)i, (float)j, t);
 	s += NB_THREAD;
 	}
 

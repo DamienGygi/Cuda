@@ -1,10 +1,12 @@
 #include "RayTracing.h"
 
+
 #include <iostream>
 #include <assert.h>
 
 #include "Device.h"
 #include <assert.h>
+
 
 using std::cout;
 using std::endl;
@@ -17,7 +19,7 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-extern __global__ void rayTracing(uchar4* ptrDevPixels,uint w, uint h,float t);
+extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, uint nbSphere);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -39,21 +41,31 @@ extern __global__ void rayTracing(uchar4* ptrDevPixels,uint w, uint h,float t);
  |*	Constructeur	    *|
  \*-------------------------*/
 
-RayTracing::RayTracing(const Grid& grid, uint w, uint h, float dt) :
-	Animable_I<uchar4>(grid, w, h, "Rippling_Cuda_RGBA_uchar4")
+RayTracing::RayTracing(const Grid &grid, uint width, uint height, float dt, uint nbSphere) :
+	Animable_I<uchar4>(grid, w, h, "Raytracing_Cuda")
     {
-    assert(w == h); // specific rippling
 
-    // Inputs
+    // time
+    this->t = 0;
     this->dt = dt;
 
-    // Tools
-    this->t = 0; // protected dans Animable
+    // Inputs
+    this->nbSphere = nbSphere;
+
+    SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
+    Sphere* ptrTabSphere = sphereCreator.getTabSphere();
+
+    //MemoryManagement
+    this->sizeOctetSpheres = nbSphere * sizeof(Sphere);
+    Device::malloc(&ptrDevTabSphere, sizeOctetSpheres);
+    Device::memclear(ptrDevTabSphere, sizeOctetSpheres);
+    Device::memcpyHToD(ptrDevTabSphere, ptrTabSphere, sizeOctetSpheres);
+
     }
 
 RayTracing::~RayTracing()
     {
-    // rien
+    Device::free(ptrDevTabSphere);
     }
 
 /*-------------------------*\
@@ -68,13 +80,13 @@ RayTracing::~RayTracing()
  */
 void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
-    Device::lastCudaError("rippling rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
+    Device::lastCudaError("raytracing rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
 
     // TODO lancer le kernel avec <<<dg,db>>>
-    rayTracing<<<dg,db>>>(ptrDevPixels,w,h,t);
+    raytracing<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
     // le kernel est importer ci-dessus (ligne 19)
 
-    Device::lastCudaError("rippling rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
+    Device::lastCudaError("raytracing rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
     }
 
 /**

@@ -39,6 +39,8 @@ Animable_I<uchar4>* RayTracingProvider::createAnimable()
     // Animation;
     float dt = 2 * PI / 10;
 
+    int nbSphere = 1;
+
     // Dimension
     int dw = 16 * 60;
     int dh = 16 * 60;
@@ -52,7 +54,8 @@ Animable_I<uchar4>* RayTracingProvider::createAnimable()
 
     Grid grid(dg,db);
 
-    return new RayTracing(grid,dw, dh, dt);
+    return new RayTracing(grid,dw, dh, dt, nbSphere);
+
     }
 
 /**
