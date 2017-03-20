@@ -7,7 +7,7 @@ class SphereCreator
 	|*		Constructor		 *|
 	 \*-------------------------------------*/
     public:
-	SphereCreator(int nbSpheres, int w, int h, int bord = 200);
+	SphereCreator(int nbSpheres, int w, int h, int bord);
 	virtual ~SphereCreator(void);
 	/*--------------------------------------*\
 	|*		 Methodes 		*|
@@ -25,6 +25,7 @@ class SphereCreator
 	int w;
 	int h;
 	int bord;
+
 	// Tools
 	Sphere* tabSphere;
     };

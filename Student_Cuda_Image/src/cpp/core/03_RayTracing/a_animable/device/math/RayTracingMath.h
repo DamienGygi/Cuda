@@ -2,7 +2,6 @@
 
 #include <math.h>
 #include "MathTools.h"
-
 #include "ColorTools_GPU.h"
 using namespace gpu;
 
@@ -28,10 +27,9 @@ class RayTracingMath
 	    this->ptrDevTabSphere = ptrDevTabSphere;
 	    }
 
-	// constructeur copie automatique car pas pointeur dans VagueMath
 
 	__device__
-	      virtual ~RayTracingMath()
+	       virtual ~RayTracingMath()
 	    {
 	    // rien
 	    }
@@ -46,39 +44,29 @@ class RayTracingMath
 	void colorIJ(uchar4* ptrColor, float i, float j, float t)
 	    {
 
-	    float min = 100000.f;
-	    float hueMin = -10000.f;
-	    float brightnessMin = 100000.f;
-
 	    float2 sol;
 	    sol.x = i;
 	    sol.y = j;
 
-	    Sphere sphere = ptrDevTabSphere[0];
-	    float hcarre = sphere.hCarre(sol);
+	    ptrColor->x = 0;
+	    ptrColor->y = 0;
+	    ptrColor->z = 0;
+	    ptrColor->w = 255;
 
-	    if (sphere.isEnDessous(hcarre))
+	    float hCarre;
+
+	    Sphere s = ptrDevTabSphere[0];
+
+	    for (uint index = 0; index < nbSphere; index++)
 		{
-		float dz = sphere.dz(hcarre);
-		float dist = sphere.distance(dz);
-
-		if (dist < min)
+		s = ptrDevTabSphere[index];
+		hCarre = s.hCarre(sol);
+		if (s.isEnDessous(hCarre))
 		    {
-		    min = dist;
-		    hueMin = sphere.hue(t);
-		    brightnessMin = sphere.brightness(dz);
+		    ColorTools::HSB_TO_RVB(s.hue(t), 1.f, s.brightness(s.dz(hCarre)), ptrColor);
+		    break;
 		    }
 		}
-	    if (hueMin >= 0 && brightnessMin >= 0)
-		ColorTools::HSB_TO_RVB(hueMin, 1.f, brightnessMin, ptrColor);
-	    else
-		{
-		ptrColor->x = 0;
-		ptrColor->y = 0;
-		ptrColor->z = 0;
-		}
-
-	    ptrColor->w = 255;
 	    }
 
 	/*--------------------------------------*\
@@ -88,7 +76,7 @@ class RayTracingMath
     private:
 	// Tools
 	uint nbSphere;
-	Sphere *ptrDevTabSphere;
+	Sphere* ptrDevTabSphere;
 
     };
 

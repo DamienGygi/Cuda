@@ -1,11 +1,8 @@
 #include "RayTracingProvider.h"
 
 #include "RayTracing.h"
-
 #include "MathTools.h"
 #include "Grid.h"
-
-
 
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
@@ -39,7 +36,7 @@ Animable_I<uchar4>* RayTracingProvider::createAnimable()
     // Animation;
     float dt = 2 * PI / 10;
 
-    int nbSphere = 1;
+    uint nbSphere = 10;
 
     // Dimension
     int dw = 16 * 60;
@@ -49,12 +46,12 @@ Animable_I<uchar4>* RayTracingProvider::createAnimable()
     int mp = Device::getMPCount();
     int coreMP = Device::getCoreCountMP();
 
-    dim3 dg = dim3(96,1,1);
-    dim3 db = dim3(512,1,1);
+    dim3 dg = dim3(96, 1, 1);
+    dim3 db = dim3(512, 1, 1);
 
-    Grid grid(dg,db);
+    Grid grid(dg, db);
 
-    return new RayTracing(grid,dw, dh, dt, nbSphere);
+    return new RayTracing(grid, dw, dh, dt, nbSphere);
 
     }
 
@@ -63,11 +60,9 @@ Animable_I<uchar4>* RayTracingProvider::createAnimable()
  */
 Image_I* RayTracingProvider::createImageGL(void)
     {
-    ColorRGB_01 colorTexte(0, 1, 0); // Green
+    ColorRGB_01 colorTexte(0, 1, 0);
     return new ImageAnimable_RGBA_uchar4(createAnimable(), colorTexte);
     }
-
-
 
 /*--------------------------------------*\
  |*		Private			*|
