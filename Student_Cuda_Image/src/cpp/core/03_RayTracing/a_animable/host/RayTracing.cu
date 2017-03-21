@@ -1,12 +1,8 @@
 #include "RayTracing.h"
-
-
 #include <iostream>
 #include <assert.h>
-
 #include "Device.h"
 #include <assert.h>
-
 
 using std::cout;
 using std::endl;
@@ -50,7 +46,7 @@ RayTracing::RayTracing(const Grid &grid, uint w, uint h, float dt, int nbSphere)
     this->dt = dt;
     this->nbSphere = nbSphere;
 
-    SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
+    SphereCreator sphereCreator = SphereCreator(nbSphere, w, h,100);
     Sphere* ptrTabSphere = sphereCreator.getTabSphere();
 
     //MemoryManagement
