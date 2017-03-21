@@ -43,7 +43,7 @@ Animable_I<uchar4>* MandelbrotProvider::createAnimable(void)
 
     // Animation;
     //float dt = 2 * PI / 800;
-    float dt = 0.0f;
+    float dt = 1.0f;
     int n = 100;
 
     // Dimension

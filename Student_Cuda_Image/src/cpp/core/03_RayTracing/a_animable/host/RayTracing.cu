@@ -19,7 +19,7 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, uint nbSphere);
+extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -41,15 +41,13 @@ extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t,
  |*	Constructeur	    *|
  \*-------------------------*/
 
-RayTracing::RayTracing(const Grid &grid, uint width, uint height, float dt, uint nbSphere) :
+RayTracing::RayTracing(const Grid &grid, uint w, uint h, float dt, int nbSphere) :
 	Animable_I<uchar4>(grid, w, h, "Raytracing_Cuda")
     {
 
     // time
     this->t = 0;
     this->dt = dt;
-
-    // Inputs
     this->nbSphere = nbSphere;
 
     SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);

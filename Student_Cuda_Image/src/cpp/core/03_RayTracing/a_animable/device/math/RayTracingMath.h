@@ -43,12 +43,12 @@ class RayTracingMath
     public:
 
 	__device__
-	void colorIJ(uchar4* ptrColor, float i, float j, float t)
+	void colorIJ(uchar4* ptrColor, int i, int j, float t)
 	    {
 
 	    float min = 100000.f;
 	    float hueMin = -10000.f;
-	    float brightnessMin = 100000.f;
+	    float brightnessMin = -100000.f;
 
 	    float2 sol;
 	    sol.x = i;
@@ -70,7 +70,7 @@ class RayTracingMath
 		    }
 		}
 	    if (hueMin >= 0 && brightnessMin >= 0)
-		ColorTools::HSB_TO_RVB(hueMin, 1.f, brightnessMin, ptrColor);
+		ColorTools::HSB_TO_RVB(hueMin, 1, brightnessMin, ptrColor);
 	    else
 		{
 		ptrColor->x = 0;
@@ -87,7 +87,7 @@ class RayTracingMath
 
     private:
 	// Tools
-	uint nbSphere;
+	int nbSphere;
 	Sphere *ptrDevTabSphere;
 
     };

@@ -13,7 +13,7 @@ using std::endl;
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
  \*---------------------------------------------------------------------*/
-extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float t, uint n, DomaineMath domaineMath);
+extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float dt, uint n, DomaineMath domaineMath);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -31,14 +31,14 @@ extern __global__ void mandelbrot(uchar4* ptrDevPixels, uint w, uint h, float t,
  |*		Public			*|
  \*-------------------------------------*/
 
-Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float t, uint n, const DomaineMath &domaineMath) :
-	Animable_I<uchar4>(grid, w, h, "Mandelbrot_Cuda", domaineMath), variateurAnimation(Interval<float>(30,100), t)
+Mandelbrot::Mandelbrot(const Grid& grid, uint w, uint h, float dt, uint n, const DomaineMath &domaineMath) :
+	Animable_I<uchar4>(grid, w, h, "Mandelbrot_Cuda", domaineMath), variateurAnimation(Interval<float>(30,500), dt)
     {
     // Input
     this->n = n;
 
     // Tools
-    this->t = t;					// protected dans super classe Animable
+    this->t = 0;					// protected dans super classe Animable
 
     }
 
@@ -56,8 +56,9 @@ Mandelbrot::~Mandelbrot(void)
  */
 void Mandelbrot::animationStep()
     {
-    this->t+=t;
-    //this->n =variateurAnimation.varierAndGet();
+    n = variateurAnimation.varierAndGet();
+    t=n;
+    //this->t=n;
     }
 
 /*--------------------------------------*\

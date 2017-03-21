@@ -55,7 +55,7 @@ __global__ void raytracing(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere
     while (s < WH)
 	{
 	IndiceTools::toIJ(s, w, &i, &j);
-	rayTracing.colorIJ(&ptrDevPixels[s], (float)i, (float)j, t);
+	rayTracing.colorIJ(&ptrDevPixels[s], i,j, t);
 	s += NB_THREAD;
 	}
 
