@@ -49,7 +49,7 @@ __host__ void uploadGPUCM(Sphere* tabValue)
     {
     size_t size = LENGTH_CM * sizeof(Sphere);
     int offset = 0;
-    HANDLE_ERROR(cudaMemcpyToSymbol(TAB_CM, tabValue, size, offset, cudaMemcpyHostToDevice));
+    cudaMemcpyToSymbol(TAB_CM, tabValue, size, offset, cudaMemcpyHostToDevice);
     }
 
 __global__ void raytracingGM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere)

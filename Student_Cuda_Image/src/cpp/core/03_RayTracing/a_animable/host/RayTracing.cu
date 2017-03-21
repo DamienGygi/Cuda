@@ -22,7 +22,8 @@ using std::endl;
 
 extern __global__ void raytracingGM(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
 extern __global__ void raytracingCM(uchar4* TAB_CM, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
-extern __host__ void upLoadGPUCM(Sphere* tabValue);
+extern __host__ void uploadGPUCM(Sphere* tabValue);
+
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
@@ -61,7 +62,7 @@ RayTracing::RayTracing(const Grid &grid, uint w, uint h, float dt, int nbSphere)
     Device::memclear(ptrDevTabSphere, sizeOctetSpheres);
     Device::memcpyHToD(ptrDevTabSphere, ptrTabSphere, sizeOctetSpheres);
 
-    upLoadGPUCM(ptrTabSphere);
+    uploadGPUCM(ptrTabSphere);
     }
 
 RayTracing::~RayTracing()
@@ -81,7 +82,7 @@ RayTracing::~RayTracing()
  */
 void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
-    Device::lastCudaError("raytracing rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
+    //Device::lastCudaError("raytracing rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
 
     // TODO lancer le kernel avec <<<dg,db>>>
     //raytracingGM<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
@@ -89,7 +90,7 @@ void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
 
     // le kernel est importer ci-dessus (ligne 19)
 
-    Device::lastCudaError("raytracing rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
+    //Device::lastCudaError("raytracing rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
     }
 
 /**
