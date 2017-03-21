@@ -93,7 +93,7 @@ void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
  */
 void RayTracing::animationStep()
     {
-    //t += dt;
+    t += dt;
     }
 
 /*--------------------------------------*\

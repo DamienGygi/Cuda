@@ -11,6 +11,7 @@ class Sphere
 	    this->centre = centre;
 	    this->r = rayon;
 	    this->hueStart = hue;
+	    this->T=hueStart;
 
 	    // Tools
 	    this->rCarre = rayon * rayon;

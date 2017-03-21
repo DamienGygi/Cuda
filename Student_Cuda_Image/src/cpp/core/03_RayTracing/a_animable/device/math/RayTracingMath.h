@@ -47,7 +47,7 @@ class RayTracingMath
 	    {
 
 	    float min = 1000.f;
-	    float hueMin = -100.f;
+	    float hueMin = -1000.f;
 	    float brightnessMin = -1000.f;
 	    float hcarre;
 	    float dz;
