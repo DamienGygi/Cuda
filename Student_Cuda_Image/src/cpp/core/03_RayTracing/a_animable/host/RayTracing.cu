@@ -7,6 +7,7 @@
 #include "Device.h"
 #include <assert.h>
 
+#include "length_cm.h"
 
 using std::cout;
 using std::endl;
@@ -19,8 +20,9 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
-
+extern __global__ void raytracingGM(uchar4* ptrTabPixels, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
+extern __global__ void raytracingCM(uchar4* TAB_CM, uint w, uint h, float t, Sphere *ptrSphere, int nbSphere);
+extern __host__ void upLoadGPUCM(Sphere* tabValue);
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
@@ -37,14 +39,14 @@ extern __global__ void raytracing(uchar4* ptrTabPixels, uint w, uint h, float t,
  |*		Public			*|
  \*-------------------------------------*/
 
-/*-------------------------*\
+/*-------------------------*\raytracingcm
  |*	Constructeur	    *|
  \*-------------------------*/
 
 RayTracing::RayTracing(const Grid &grid, uint w, uint h, float dt, int nbSphere) :
 	Animable_I<uchar4>(grid, w, h, "Raytracing_Cuda")
     {
-
+    assert(nbSphere==LENGTH_CM);
     // time
     this->t = 0;
     this->dt = dt;
@@ -59,6 +61,7 @@ RayTracing::RayTracing(const Grid &grid, uint w, uint h, float dt, int nbSphere)
     Device::memclear(ptrDevTabSphere, sizeOctetSpheres);
     Device::memcpyHToD(ptrDevTabSphere, ptrTabSphere, sizeOctetSpheres);
 
+    upLoadGPUCM(ptrTabSphere);
     }
 
 RayTracing::~RayTracing()
@@ -81,7 +84,9 @@ void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
     Device::lastCudaError("raytracing rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
 
     // TODO lancer le kernel avec <<<dg,db>>>
-    raytracing<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
+    //raytracingGM<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
+    raytracingCM<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
+
     // le kernel est importer ci-dessus (ligne 19)
 
     Device::lastCudaError("raytracing rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
