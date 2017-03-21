@@ -1,8 +1,12 @@
 #include "RayTracing.h"
+
+
 #include <iostream>
 #include <assert.h>
+
 #include "Device.h"
 #include <assert.h>
+
 
 using std::cout;
 using std::endl;
@@ -99,4 +103,3 @@ void RayTracing::animationStep()
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
-

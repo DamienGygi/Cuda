@@ -5,7 +5,7 @@
 |*		Constructeur		*|
  \*-------------------------------------*/
 
-SphereCreator::SphereCreator(int nbSpheres, int w, int h, int bord)
+SphereCreator::SphereCreator(int nbSpheres, int w, int h, int bord=100)
     {
     // Inputs
     this->nbSpheres = nbSpheres;
