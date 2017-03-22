@@ -42,7 +42,6 @@ Animable_I<uchar4>* MandelbrotProvider::createAnimable(void)
     DomaineMath domaineMath = DomaineMath(-2.1, -1.3, 0.8, 1.3);
 
     // Animation;
-    //float dt = 2 * PI / 800;
     float dt = 1.0f;
     int n = 100;
 

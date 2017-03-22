@@ -70,10 +70,10 @@ void Mandelbrot::animationStep()
  */
 void Mandelbrot::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
-    Device::lastCudaError("rippling rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
+    //Device::lastCudaError("rippling rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
     mandelbrot<<<dg,db>>>(ptrDevPixels,w,h,t,n,domaineMath);
     // le kernel est importer ci-dessus (ligne 19)
-    Device::lastCudaError("rippling rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
+    //Device::lastCudaError("rippling rgba uchar4 (after kernel)"); // facultatif, for debug only, remove for release
     }
 
 /*--------------------------------------*\
