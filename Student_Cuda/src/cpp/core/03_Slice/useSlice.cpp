@@ -40,6 +40,7 @@ bool useSlice()
 
     dim3 dg = dim3(24, 1, 1);
     dim3 db = dim3(128, 1, 1);
+
     float pi;
     // SearchPI
 	{

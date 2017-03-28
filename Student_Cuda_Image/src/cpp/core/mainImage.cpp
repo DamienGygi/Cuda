@@ -53,8 +53,8 @@ int mainImage(Settings& settings)
     ImageOption zoomable(true);
     ImageOption nozoomable(false);
 
-    Viewer<MandelbrotProvider> mandelbrot(zoomable, 0, 0);
-    Viewer<RipplingProvider> rippling(nozoomable, 25, 25); // imageOption px py
+    //Viewer<MandelbrotProvider> mandelbrot(zoomable, 0, 0);
+    //Viewer<RipplingProvider> rippling(nozoomable, 25, 25); // imageOption px py
     Viewer<RayTracingProvider> rayTracing(nozoomable, 25, 25); // imageOption px py
 
     // Common

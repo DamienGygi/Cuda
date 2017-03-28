@@ -30,12 +30,14 @@ __constant__ float TAB_CM[LENGTH_CM];
 __host__ void uploadGPUCM(Sphere* tabValue);
 
 __global__ void raytracingGM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
-__global__ void raytracingCM(uchar4* TAB_CM, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
+__global__ void raytracingCM(uchar4* ptrDevPixel, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
+__global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
 static __device__ void work(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
+static __device__ void copyToSM(Sphere*ptrDevSphere, Sphere* TAB_SM);
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -57,10 +59,15 @@ __global__ void raytracingGM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphe
     work(ptrDevPixels, w, h, t, ptrDevSphere, nbSphere);
 
     }
-__global__ void raytracingCM(uchar4* TAB_CM, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere)
+__global__ void raytracingCM(uchar4* ptrDevPixel, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere)
     {
-    work(TAB_CM, w, h, t, ptrDevSphere, nbSphere);
-
+    work(ptrDevPixel, w, h, t, ptrDevSphere, nbSphere);
+    }
+__global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere)
+    {
+    extern __shared__ Sphere TAB_SM[];
+    copyToSM(TAB_SM,ptrDevSphere);
+    work(ptrDevPixel, w, h, t, ptrDevSphere, nbSphere);
     }
 
 /*--------------------------------------*\
@@ -84,6 +91,17 @@ __device__ void work(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrD
 	s += NB_THREAD;
 	}
 
+    }
+__device__ void copyToSM(Sphere* TAB_SM, Sphere* ptrDevSphere)
+    {
+    const int TID_LOCAL = Indice2D::tidLocal();
+    	const int NB_THREAD_LOCAL = Indice2D::nbThreadLocal();
+    	int s = TID_LOCAL;
+    	while (s<LENGTH_CM)
+    	{
+    		TAB_SM[s]=ptrDevSphere[s];
+    		s += NB_THREAD_LOCAL;
+    	}
     }
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
