@@ -1,6 +1,8 @@
 #include <iostream>
-#include <stdlib.h>
-
+#include "MathTools.h"
+#include "Slice.h"
+#include <limits.h>
+#include "cudaTools.h"
 
 using std::cout;
 using std::endl;
@@ -13,21 +15,15 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-//extern bool useHello(void);
-//extern bool useAddVecteur(void);
-extern bool useSlice(void);
-
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore();
+bool useSlice(void);
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
-
-
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -37,25 +33,28 @@ int mainCore();
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore()
+bool useSlice()
     {
-    bool isOk = true;
-    //isOk &= useHello();
-    //isOk &=useAddVecteur();
-    isOk &=useSlice();
-    //cout << "\nisOK = " << isOk << endl;
-    //cout << "\nEnd : mainCore" << endl;
+    //int nbSlice = INT_MAX;
+    int nbSlice = 400000000;
 
-    return isOk ? EXIT_SUCCESS : EXIT_FAILURE;
+    dim3 dg = dim3(24, 1, 1);
+    dim3 db = dim3(128, 1, 1);
+    float pi;
+    // SearchPI
+	{
+	Slice slice(nbSlice, dg, db);
+	slice.process();
+	pi = slice.getPi();
+	}
+    cout << "Pi value = " << pi << endl;
+    return MathTools::isEquals(pi, PI_FLOAT, 0.01f);
     }
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
 
-
-
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
-
