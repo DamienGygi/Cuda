@@ -1,4 +1,4 @@
-#include "Indice2D.h"
+#include "Indice1D.h"
 #include "cudaTools.h"
 #include "reductionADD.h"
 #include <stdio.h>
