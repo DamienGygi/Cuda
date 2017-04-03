@@ -1,1 +1,1 @@
-/home/arc28/CUDA/toStudent/code/WCuda/Student_OMP//src/cpp/test/unit/01_Test_Hello/TestHello.h
+/home/arc6/CUDA/toStudent/code/WCuda/Student_OMP//src/cpp/test/unit/01_Test_Hello/TestHello.h

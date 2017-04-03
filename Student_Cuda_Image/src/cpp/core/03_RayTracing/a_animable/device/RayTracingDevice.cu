@@ -37,7 +37,7 @@ __global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Spher
  |*		Private			*|
  \*-------------------------------------*/
 static __device__ void work(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
-static __device__ void copyToSM(Sphere*ptrDevSphere, Sphere* TAB_SM);
+__device__ void copyToSM(Sphere* ptrDevSphere, Sphere* tab_SM);
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -65,9 +65,10 @@ __global__ void raytracingCM(uchar4* ptrDevPixel, uint w, uint h, float t, Spher
     }
 __global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere)
     {
-    extern __shared__ Sphere TAB_SM[];
-    copyToSM(TAB_SM,ptrDevSphere);
-    work(ptrDevPixel, w, h, t, ptrDevSphere, nbSphere);
+    extern __shared__ Sphere tab_SM[];
+    copyToSM(ptrDevSphere,tab_SM);
+    __syncthreads();
+    work(ptrDevPixel, w, h, t, tab_SM, nbSphere);
     }
 
 /*--------------------------------------*\
@@ -92,14 +93,15 @@ __device__ void work(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrD
 	}
 
     }
-__device__ void copyToSM(Sphere* TAB_SM, Sphere* ptrDevSphere)
+
+__device__ void copyToSM(Sphere* ptrDevSphere,Sphere* tab_SM)
     {
-    const int TID_LOCAL = Indice2D::tidLocal();
+	const int TID_LOCAL = Indice2D::tidLocal();
     	const int NB_THREAD_LOCAL = Indice2D::nbThreadLocal();
     	int s = TID_LOCAL;
     	while (s<LENGTH_CM)
     	{
-    		TAB_SM[s]=ptrDevSphere[s];
+    		tab_SM[s]=ptrDevSphere[s];
     		s += NB_THREAD_LOCAL;
     	}
     }
