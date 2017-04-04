@@ -23,7 +23,7 @@ using namespace gpu;
 /*--------------------------------------*\
  |*		Imported	 	*|
  \*-------------------------------------*/
-__constant__ float TAB_CM[LENGTH_CM];
+__constant__ Sphere TAB_CM[LENGTH_CM];
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
@@ -37,7 +37,7 @@ __global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Spher
  |*		Private			*|
  \*-------------------------------------*/
 static __device__ void work(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevSphere, int nbSphere);
-__device__ void copyToSM(Sphere* ptrDevSphere, Sphere* tab_SM);
+static __device__ void copyToSM(Sphere* ptrDevSphere, Sphere* tab_SM);
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -67,6 +67,7 @@ __global__ void raytracingSM(uchar4* ptrDevPixel, uint w, uint h, float t, Spher
     {
     extern __shared__ Sphere tab_SM[];
     copyToSM(ptrDevSphere,tab_SM);
+
     __syncthreads();
     work(ptrDevPixel, w, h, t, tab_SM, nbSphere);
     }

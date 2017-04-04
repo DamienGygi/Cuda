@@ -1,1 +1,1 @@
-/home/arc28/CUDA/toStudent/code/WCuda/Cuda/Student_Cuda//src/cpp/core/02_Hello_add_vector/00_tools/VectorTools.h
+/home/arc6/CUDA/toStudent/code/WCuda/Student_Cuda//src/cpp/core/02_Hello_add_vector/00_tools/VectorTools.h
