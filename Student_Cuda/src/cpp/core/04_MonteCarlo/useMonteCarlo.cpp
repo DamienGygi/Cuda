@@ -1,6 +1,8 @@
 #include <iostream>
-#include <stdlib.h>
-
+#include "MathTools.h"
+#include "MonteCarlo.h"
+#include <limits.h>
+#include "cudaTools.h"
 
 using std::cout;
 using std::endl;
@@ -13,22 +15,15 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-//extern bool useHello(void);
-//extern bool useAddVecteur(void);
-extern bool useSlice(void);
-extern bool useMonteCarlo(void);
-
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore();
+bool useMonteCarlo(void);
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
-
-
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -38,26 +33,33 @@ int mainCore();
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore()
+bool useMonteCarlo()
     {
-    bool isOk = true;
-    //isOk &= useHello();
-    //isOk &=useAddVecteur();
-    //isOk &=useSlice();
-    isOk &=useMonteCarlo();
-    //cout << "\nisOK = " << isOk << endl;
-    //cout << "\nEnd : mainCore" << endl;
+    //int nbSlice = INT_MAX;
+    int nbFleches = 400000000;
+    int m = 20;
 
-    return isOk ? EXIT_SUCCESS : EXIT_FAILURE;
+    dim3 dg = dim3(24, 1, 1);
+    dim3 db = dim3(128, 1, 1);
+
+    float pi;
+    // SearchPI
+	{
+	MonteCarlo monteCarlo(nbFleches,m,dg,db);
+	monteCarlo.process();
+	pi = monteCarlo.getPi();
+//	MonteCarlo slice(nbSlice, dg, db);
+//	slice.process();
+//	pi = slice.getPi();
+	}
+    cout << "Pi value = " << pi << endl;
+    return MathTools::isEquals(pi, PI_FLOAT, 0.01f);
     }
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
 
-
-
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
-
