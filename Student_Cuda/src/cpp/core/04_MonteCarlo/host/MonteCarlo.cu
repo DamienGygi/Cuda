@@ -7,32 +7,36 @@ using std::endl;
 
 extern __global__ void monteCarlo(curandState* tabDevGenerator, int nbFleches, float m,int* ptrDevNx);
 
-MonteCarlo::MonteCarlo(int nbFleches,int m,dim3 dg,dim3 db) :
+MonteCarlo::MonteCarlo(int nbFleches,int m,const Grid& grid) :
 	nbFleches(nbFleches)
     {
-    this->db=db;
-    this->dg=dg;
-    Grid grid(dg,db);
+    this->db=grid.db;
+    this->dg=grid.dg;
+
     this->sizeOctetPi = sizeof(int);
-    cudaMalloc(&ptrDevNx, sizeOctetPi);
-    cudaMemset(ptrDevNx, 0, sizeOctetPi);
+
+    Device::malloc(&ptrDevNx, sizeOctetPi);
+    Device::memclear(ptrDevNx, sizeOctetPi);
+
     this->sizeOctetSM = db.x * db.y * db.z * sizeof(int);
 
     int nbThread =grid.threadCounts();
     size_t sizeOctet= nbThread*sizeof(curandState) ;
-    curandState* ptrDevGenerator=NULL;
-    cudaMalloc(&ptrDevGenerator, sizeOctet);
+    Device::malloc(&ptrDevGenerator, sizeOctet);
+    Device::memclear(ptrDevGenerator, sizeOctet);
+
     }
 
 MonteCarlo::~MonteCarlo(void)
     {
     cudaFree (ptrDevNx);
+    cudaFree (ptrDevGenerator);
     }
 
 void MonteCarlo::process()
     {
     //Device::lastCudaError("Slice (before)"); // temp debug
-    monteCarlo<<<dg,db, sizeOctetSM>>>(tabDevGenerator, nbFleches,m,ptrDevNx);// assynchrone
+    monteCarlo<<<dg,db, sizeOctetSM>>>(ptrDevGenerator, nbFleches,m,ptrDevNx);// assynchrone
     //Device::lastCudaError("Slice (after)"); // temp debug
     cudaMemcpy(&pi, ptrDevNx, sizeOctetPi, cudaMemcpyDeviceToHost); // barriere synchronisation implicite
     //pi /= nbFleches;

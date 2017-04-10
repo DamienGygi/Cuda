@@ -2,11 +2,11 @@
 
 #include "cudaTools.h"
 #include <curand_kernel.h>
-
+#include "Grid.h"
 class MonteCarlo
 {
 public:
-	MonteCarlo(int nbFleches,int m, dim3 dg,dim3 db);
+	MonteCarlo(int nbFleches,int m,const Grid& grid);
 	virtual ~MonteCarlo(void);
 
 	void process();
@@ -19,7 +19,7 @@ private:
 
 	// Output
 	float pi;
-	curandState* tabDevGenerator;
+	curandState* ptrDevGenerator=NULL;
 	// Tools
 	dim3 dg;
 	dim3 db;
