@@ -19,6 +19,7 @@ private:
 
 	// Output
 	float pi;
+	int piTest;
 	curandState* ptrDevGenerator=NULL;
 	// Tools
 	dim3 dg;

@@ -37,8 +37,8 @@ bool useMonteCarlo(void);
 bool useMonteCarlo()
     {
     //int nbSlice = INT_MAX;
-    int nbFleches = 400000000;
-    int m = 20;
+    int nbFleches = 40000000;
+    int m = 30;
 
     dim3 dg = dim3(24, 1, 1);
     dim3 db = dim3(128, 1, 1);
