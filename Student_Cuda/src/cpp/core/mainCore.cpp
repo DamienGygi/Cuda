@@ -45,7 +45,7 @@ int mainCore()
     //isOk &= useHello();
     //isOk &=useAddVecteur();
     //isOk &=useSlice();
-    //isOk &=useMonteCarlo();
+    isOk &=useMonteCarlo();
     isOk &=useMonteCarloMultiGPU();
     //cout << "\nisOK = " << isOk << endl;
     //cout << "\nEnd : mainCore" << endl;

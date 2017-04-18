@@ -40,16 +40,17 @@ MonteCarlo::~MonteCarlo(void)
 void MonteCarlo::process()
     {
     //Device::lastCudaError("Slice (before)"); // temp debug
+    Device ::printCurrent() ;
     monteCarlo<<<dg,db, sizeOctetSM>>>(ptrDevGenerator, nbFleches,m,ptrDevNx);// assynchrone
     //Device::lastCudaError("Slice (after)"); // temp debug
-    Device::memcpyDToH(&piTest, ptrDevNx, sizeOctetPi);
-    pi=(float)piTest/nbFleches*m;
+    Device::memcpyDToH(&nbFlechesEnDessous, ptrDevNx, sizeOctetPi);
+    pi=(float)nbFlechesEnDessous/nbFleches*m;
     //cudaMemcpy(&pi, ptrDevNx, sizeOctetPi, cudaMemcpyDeviceToHost); // barriere synchronisation implicite
     //pi /= nbFleches;
     }
 int MonteCarlo::getCountFleches()
     {
-    return  this->piTest;
+    return  this->nbFlechesEnDessous;
     }
 float MonteCarlo::getPi()
     {

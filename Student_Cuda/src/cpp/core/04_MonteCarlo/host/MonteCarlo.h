@@ -20,7 +20,7 @@ private:
 
 	// Output
 	float pi;
-	int piTest;
+	int nbFlechesEnDessous;
 	curandState* ptrDevGenerator=NULL;
 	// Tools
 	dim3 dg;

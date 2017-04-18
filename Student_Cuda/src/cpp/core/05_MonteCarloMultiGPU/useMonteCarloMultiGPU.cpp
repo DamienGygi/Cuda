@@ -4,6 +4,7 @@
 #include <limits.h>
 #include "cudaTools.h"
 #include "Grid.h"
+#include "Chrono.h"
 
 using std::cout;
 using std::endl;
@@ -46,10 +47,14 @@ bool useMonteCarloMultiGPU()
 
     float pi;
     // SearchPI
-
-    MonteCarloMultiGPU monteCarlo(nbFleches, m, grid);
-    monteCarlo.process();
-    pi = monteCarlo.getPi();
+    Chrono c;
+    MonteCarloMultiGPU montecarloMulti(nbFleches, m, grid);
+    c.start();
+    montecarloMulti.process();
+    pi = montecarloMulti.getPi();
+    c.stop();
+    double ellapsedTime=c.getElapseTimeS();
+    cout <<"Ellapsed time:" << ellapsedTime <<endl;
 //	MonteCarlo slice(nbSlice, dg, db);
 //	slice.process();
 //	pi = slice.getPi();
