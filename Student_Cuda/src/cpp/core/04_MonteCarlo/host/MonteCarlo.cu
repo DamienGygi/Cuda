@@ -47,7 +47,10 @@ void MonteCarlo::process()
     //cudaMemcpy(&pi, ptrDevNx, sizeOctetPi, cudaMemcpyDeviceToHost); // barriere synchronisation implicite
     //pi /= nbFleches;
     }
-
+int MonteCarlo::getCountFleches()
+    {
+    return  this->piTest;
+    }
 float MonteCarlo::getPi()
     {
     return this->pi;

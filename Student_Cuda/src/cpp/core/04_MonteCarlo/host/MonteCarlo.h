@@ -11,6 +11,7 @@ public:
 
 	void process();
 	float getPi();
+	int getCountFleches();
 
 private:
 	// Inputs

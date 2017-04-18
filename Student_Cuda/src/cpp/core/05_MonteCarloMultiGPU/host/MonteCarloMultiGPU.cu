@@ -52,10 +52,9 @@ void MonteCarloMultiGPU::process()
 		Device::setDevice(deviceId);
 		MonteCarlo monteCarlo(nbFlechesGPU,m,grid);
 		monteCarlo.process();
-		totalResult+=monteCarlo.getPi();
+		totalResult+=monteCarlo.getCountFleches();
 	    }
-    pi=totalResult;
-    //pi /= nbFleches;
+    pi=(float)totalResult/nbFleches*m;
     }
 
 float MonteCarloMultiGPU::getPi()
