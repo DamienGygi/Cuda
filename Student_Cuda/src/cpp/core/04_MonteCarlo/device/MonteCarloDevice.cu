@@ -64,7 +64,7 @@ __device__ void reduceIntraThread(curandState* tabDevGenerator,int* tabSM, int n
 	yAlea = curand_uniform(&localGenerator) * m;
 
 	y = f(xAlea);
-	if (y > yAlea)
+	if (y >= yAlea)
 	    {
 	    nx++;
 	    }
