@@ -1,6 +1,7 @@
 #include <iostream>
-#include <stdlib.h>
-
+#include "Grid.h"
+#include "Device.h"
+#include "MathTools.h"
 
 using std::cout;
 using std::endl;
@@ -13,25 +14,17 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-//extern bool useHello(void);
-//extern bool useAddVecteur(void);
-extern bool useSlice(void);
-extern bool useMonteCarlo(void);
-extern bool useHistogram(void);
-extern bool useHistogramme(void);
-extern bool useMonteCarloMultiGPU(void);
+#include "../06_Histogramme/host/Histogramme.h"
 
 /*--------------------------------------*\
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore();
+bool useHistogramme(void);
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
-
-
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -41,29 +34,27 @@ int mainCore();
  |*		Public			*|
  \*-------------------------------------*/
 
-int mainCore()
+bool useHistogramme()
     {
-    bool isOk = true;
-    //isOk &= useHello();
-    //isOk &=useAddVecteur();
-    //isOk &=useSlice();
-    //isOk &=useMonteCarlo();
-    //isOk &=useMonteCarloMultiGPU();
-    //isOk &=useHistogram();
-    isOk &=useHistogramme();
-    //cout << "\nisOK = " << isOk << endl;
-    //cout << "\nEnd : mainCore" << endl;
+    int max = 256;
+    int result[max];
+    int mp = Device::getMPCount();
+    dim3 dg = dim3(mp, 1, 1);
+    dim3 db = dim3(64, 1, 1);
+    Grid grid(dg, db);
 
-    return isOk ? EXIT_SUCCESS : EXIT_FAILURE;
+    Histogramme histogramme(grid, result, max);
+    histogramme.run();
+
+    for (int i = 0; i < max; i++ ) {printf("Item[%d] => %d fois\n ", i, result[i] );}
+    bool isOk = true;
+    return isOk;
     }
 
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
 
-
-
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
-
