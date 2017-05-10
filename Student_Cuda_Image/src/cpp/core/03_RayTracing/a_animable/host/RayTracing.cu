@@ -85,7 +85,7 @@ void RayTracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
     {
     //Device::lastCudaError("raytracing rgba uchar4 (before kernel)"); // facultatif, for debug only, remove for release
 
-    static int i=2 ;
+    static int i=1 ;
     if (i%3 == 0)
     {
 	 raytracingGM<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);

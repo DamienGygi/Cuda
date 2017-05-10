@@ -49,8 +49,7 @@ int mainCore()
     //isOk &=useSlice();
     //isOk &=useMonteCarlo();
     //isOk &=useMonteCarloMultiGPU();
-    //isOk &=useHistogram();
-    isOk &=useHistogramme();
+    //isOk &=useHistogramme();
     //cout << "\nisOK = " << isOk << endl;
     //cout << "\nEnd : mainCore" << endl;
 
